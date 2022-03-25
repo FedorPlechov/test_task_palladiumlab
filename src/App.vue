@@ -1,26 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <TheHeader :is-white-mode="isWhiteMode" />
+  <router-view @changedWhiteMode="setWhiteMode($event)"></router-view>
+  <TheFooter />
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import TheHeader from "@/components/layout/TheHeader";
+import TheFooter from "@/components/layout/TheFooter";
 export default {
   name: "App",
   components: {
-    HelloWorld,
+    TheHeader,
+    TheFooter,
+  },
+  data() {
+    return {
+      isWhiteMode: false,
+    };
+  },
+  methods: {
+    setWhiteMode(payload) {
+      this.isWhiteMode = payload;
+    },
   },
 };
 </script>
 
 <style lang="scss">
+@import "~reset-css/sass/_reset.scss";
+@import url("/src/assets/style/font.scss");
+@import url("/src/assets/style/font-icons.css");
+
+html * {
+  box-sizing: border-box;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  margin: auto;
+  max-width: 1440px;
+  font-family: "Gilroy", sans-serif;
 }
 </style>
